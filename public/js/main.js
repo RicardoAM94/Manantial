@@ -433,7 +433,20 @@ function pauseSlideshow() {
 // WHATSAPP FUNCTIONALITY
 // ========================
 async function contactWhatsApp(service = 'default') {
+    // Agregar feedback visual
+    const whatsappButton = document.querySelector('.whatsapp-float');
+    const originalTooltip = document.querySelector('.whatsapp-tooltip')?.textContent;
+    
     try {
+        // Mostrar estado de procesamiento
+        if (whatsappButton) {
+            whatsappButton.classList.add('processing');
+            const tooltip = whatsappButton.querySelector('.whatsapp-tooltip');
+            if (tooltip) {
+                tooltip.textContent = 'Conectando con WhatsApp';
+            }
+        }
+        
         // Obtener configuración de WhatsApp del endpoint público
         const response = await fetch('/api/whatsapp-config');
         const config = await response.json();
@@ -442,10 +455,39 @@ async function contactWhatsApp(service = 'default') {
         const number = config.whatsapp?.number || WHATSAPP_CONFIG.number;
         const message = WHATSAPP_CONFIG.messages[service] || WHATSAPP_CONFIG.messages.default;
         const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`;
         
-        // Abrir en nueva ventana
-        window.open(whatsappUrl, '_blank');
+        // Limpiar número (remover espacios, guiones, paréntesis)
+        const cleanNumber = number.replace(/[^\d+]/g, '');
+        
+        // Detectar si es móvil para usar el método correcto
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        let whatsappUrl;
+        if (isMobile) {
+            // En móviles, intentar primero con whatsapp:// y fallback a wa.me
+            whatsappUrl = `whatsapp://send?phone=${cleanNumber}&text=${encodedMessage}`;
+            
+            // Crear enlace temporal e intentar abrirlo
+            const link = document.createElement('a');
+            link.href = whatsappUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            
+            // Agregar al DOM temporalmente
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Fallback después de un pequeño delay
+            setTimeout(() => {
+                const fallbackUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
+                window.location.href = fallbackUrl;
+            }, 1000);
+        } else {
+            // En desktop, usar wa.me directamente
+            whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
         
         // Incrementar estadísticas
         await fetch('/api/stats/whatsappClicks', { method: 'POST' });
@@ -454,16 +496,34 @@ async function contactWhatsApp(service = 'default') {
         if (typeof gtag !== 'undefined') {
             gtag('event', 'whatsapp_contact', {
                 'service_type': service,
-                'event_category': 'engagement'
+                'event_category': 'engagement',
+                'device_type': isMobile ? 'mobile' : 'desktop'
             });
         }
+        
+        console.log('✅ WhatsApp abierto:', whatsappUrl);
+        
     } catch (error) {
         console.error('❌ Error contactando WhatsApp:', error);
-        // Fallback al método original
+        // Fallback simple
         const message = WHATSAPP_CONFIG.messages[service] || WHATSAPP_CONFIG.messages.default;
         const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${WHATSAPP_CONFIG.number}?text=${encodedMessage}`;
-        window.open(whatsappUrl, '_blank');
+        const cleanNumber = WHATSAPP_CONFIG.number.replace(/[^\d+]/g, '');
+        const fallbackUrl = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
+        
+        // Usar location.href como último recurso
+        window.location.href = fallbackUrl;
+    } finally {
+        // Restaurar estado del botón después de un delay
+        setTimeout(() => {
+            if (whatsappButton) {
+                whatsappButton.classList.remove('processing');
+                const tooltip = whatsappButton.querySelector('.whatsapp-tooltip');
+                if (tooltip && originalTooltip) {
+                    tooltip.textContent = originalTooltip;
+                }
+            }
+        }, 2000);
     }
 }
 

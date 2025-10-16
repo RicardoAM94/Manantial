@@ -98,7 +98,64 @@ typings/
 dist
 
 # Gatsby files
-.cache/
+.cache/sudo cat /etc/systemd/system/manantial-server.service
+
+# Ver las variables de entorno que systemd puede no tener
+cat ~/Manantial/.env
+[Unit]
+Description=Manantial de los Secretos - Sistema de Gestión Web
+After=network.target
+
+[Service]
+Type=simple
+User=ricardomr
+WorkingDirectory=/home/ricardomr/Manantial
+Environment=NODE_ENV=production
+ExecStart=/snap/bin/node server.js
+Restart=on-failure
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=manantial-server
+
+# Security
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/home/ricardomr/Manantial
+
+[Install]
+WantedBy=multi-user.target
+# =======================================
+# EJEMPLO DE CONFIGURACIÓN
+# =======================================
+# Copia este archivo como .env y personaliza los valores
+
+# Puerto del servidor
+PORT=3000
+
+# =======================================
+# CREDENCIALES DE ADMINISTRACIÓN
+# =======================================
+# CAMBIAR ESTAS CREDENCIALES ANTES DE USAR EN PRODUCCIÓN!
+
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=mi_password_super_seguro
+
+# Clave secreta para sesiones
+SESSION_SECRET=clave_secreta_muy_larga_y_segura_para_sesiones
+
+# =======================================
+# CONFIGURACIÓN DE SEGURIDAD
+# =======================================
+
+# Modo de desarrollo (false en producción)
+DEVELOPMENT_MODE=false
+
+# Tiempo de expiración de sesión en milisegundos
+SESSION_MAX_AGE=86400000ricardomr@raspberrypi:~/Manantial$
 
 # Storybook build outputs
 .out
