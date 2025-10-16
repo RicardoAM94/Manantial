@@ -1,0 +1,33 @@
+{
+  "name": "manantial-de-los-secretos",
+  "version": "2.0.0",
+  "description": "Sistema web esotérico con panel de administración y autenticación",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "nodemon server-dev.js",
+    "dev-win": "node server-dev.js",
+    "dev-safe": "node server.js",
+    "setup": "npm install",
+    "config": "node setup.js"
+  },
+  "keywords": [
+    "esoterico",
+    "magia",
+    "amor",
+    "suerte",
+    "amarres"
+  ],
+  "author": "Ricardo MR",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "express-session": "^1.18.2",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
