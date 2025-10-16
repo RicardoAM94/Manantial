@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manantial de los Secretos - Magia y Esoterismo</title>
+    <meta name="description" content="Descubre el poder de la magia blanca, roja y negra. Amarres de amor, rituales de suerte y dinero. Consultas esotéricas profesionales.">
+    <meta name="keywords" content="magia, esoterismo, amarres, amor, suerte, dinero, magia blanca, magia roja, magia negra, rituales">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    
+    <!-- Preconnect para optimización -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="crystal-ball">🔮</div>
+            <div class="loader-text">Conectando con el universo...</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="logo-icon">🔮</span>
+                    <span class="logo-text">Manantial de los Secretos</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#amor" class="nav-link">Amor</a></li>
+                    <li><a href="#amarres" class="nav-link">Amarres</a></li>
+                    <li><a href="#magia" class="nav-link">Magia</a></li>
+                    <li><a href="#suerte" class="nav-link">Suerte & Dinero</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Slider de Anuncios -->
+    <section id="inicio" class="announcements-slider">
+        <div class="slider-container">
+            <div class="slide active" data-bg="gradient-purple">
+                <div class="slide-content">
+                    <h2 class="slide-title">✨ Consultas Personalizadas ✨</h2>
+                    <p class="slide-text">Descubre tu destino con lecturas de tarot y consultas esotéricas profesionales</p>
+                    <button class="cta-button" onclick="contactWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Consultar Ahora
+                    </button>
+                </div>
+                <div class="slide-decoration">
+                    <div class="floating-symbol">🌙</div>
+                    <div class="floating-symbol">⭐</div>
+                    <div class="floating-symbol">🔯</div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-gold">
+                <div class="slide-content">
+                    <h2 class="slide-title">💝 Amarres de Amor Efectivos 💝</h2>
+                    <p class="slide-text">Recupera el amor perdido o atrae a tu ser amado con rituales poderosos</p>
+                    <button class="cta-button" onclick="contactWhatsApp('amarres')">
+                        <i class="fab fa-whatsapp"></i> Más Información
+                    </button>
+                </div>
+                <div class="slide-decoration">
+                    <div class="floating-symbol">💖</div>
+                    <div class="floating-symbol">🌹</div>
+                    <div class="floating-symbol">💫</div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-green">
+                <div class="slide-content">
+                    <h2 class="slide-title">🍀 Rituales de Suerte y Prosperidad 🍀</h2>
+                    <p class="slide-text">Atrae la abundancia y el éxito a tu vida con magia blanca poderosa</p>
+                    <button class="cta-button" onclick="contactWhatsApp('suerte')">
+                        <i class="fab fa-whatsapp"></i> Solicitar Ritual
+                    </button>
+                </div>
+                <div class="slide-decoration">
+                    <div class="floating-symbol">💰</div>
+                    <div class="floating-symbol">🌟</div>
+                    <div class="floating-symbol">🔮</div>
+                </div>
+            </div>
+
+            <div class="slide" data-bg="gradient-red">
+                <div class="slide-content">
+                    <h2 class="slide-title">🔥 Magia Roja Especializada 🔥</h2>
+                    <p class="slide-text">Rituales intensos de pasión y atracción para casos complejos</p>
+                    <button class="cta-button" onclick="contactWhatsApp('magia-roja')">
+                        <i class="fab fa-whatsapp"></i> Consulta Privada
+                    </button>
+                </div>
+                <div class="slide-decoration">
+                    <div class="floating-symbol">🌶️</div>
+                    <div class="floating-symbol">❤️‍🔥</div>
+                    <div class="floating-symbol">⚡</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles del slider -->
+        <div class="slider-controls">
+            <button class="prev-btn" onclick="changeSlide(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="slide-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+            <button class="next-btn" onclick="changeSlide(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Sección Amor -->
+    <section id="amor" class="content-section love-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💖 Magia del Amor 💖</h2>
+                <p class="section-subtitle">Encuentra tu camino hacia el amor verdadero</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="card-icon">💕</div>
+                    <h3>Amarres de Amor</h3>
+                    <p>Rituales especializados para recuperar o atraer el amor. Resultados garantizados con magia blanca.</p>
+                    <ul class="service-features">
+                        <li>✨ Ritual personalizado</li>
+                        <li>🌙 Trabajos con luna llena</li>
+                        <li>💖 Sin daño a terceros</li>
+                        <li>🔮 Seguimiento completo</li>
+                    </ul>
+                    <button class="service-btn" onclick="contactWhatsApp('amarre-amor')">Consultar</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-icon">💐</div>
+                    <h3>Endulzamientos</h3>
+                    <p>Suaviza relaciones tensas y trae dulzura a tu vida amorosa con rituales especializados.</p>
+                    <ul class="service-features">
+                        <li>✨ Energías positivas</li>
+                        <li>💝 Fortalece vínculos</li>
+                        <li>🌟 Armonía en la pareja</li>
+                        <li>� Transformación gradual</li>
+                    </ul>
+                    <button class="service-btn" onclick="contactWhatsApp('endulzamiento')">Más Info</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-icon">💒</div>
+                    <h3>Unión de Parejas</h3>
+                    <p>Rituales para formalizar relaciones, matrimonios y compromisos duraderos.</p>
+                    <ul class="service-features">
+                        <li>💍 Rituales de compromiso</li>
+                        <li>⛪ Bendiciones especiales</li>
+                        <li>👫 Armonía de pareja</li>
+                        <li>🌈 Futuro próspero juntos</li>
+                    </ul>
+                    <button class="service-btn" onclick="contactWhatsApp('union-parejas')">Reservar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Magia -->
+    <section id="magia" class="content-section magic-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🔮 Artes Mágicas 🔮</h2>
+                <p class="section-subtitle">El poder ancestral al servicio de tus necesidades</p>
+            </div>
+            
+            <div class="magic-types">
+                <div class="magic-card white-magic">
+                    <div class="magic-header">
+                        <h3>✨ Magia Blanca ✨</h3>
+                        <p>Rituales de luz y protección</p>
+                    </div>
+                    <div class="magic-content">
+                        <ul>
+                            <li>🛡️ Limpias espirituales</li>
+                            <li>🏠 Protección del hogar</li>
+                            <li>👶 Bendiciones familiares</li>
+                            <li>🌟 Atracción de buenas energías</li>
+                            <li>💊 Sanación energética</li>
+                            <li>🧿 Amuletos de protección</li>
+                        </ul>
+                        <button class="magic-btn" onclick="contactWhatsApp('magia-blanca')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="magic-card red-magic">
+                    <div class="magic-header">
+                        <h3>🔥 Magia Roja 🔥</h3>
+                        <p>Rituales de pasión y deseo</p>
+                    </div>
+                    <div class="magic-content">
+                        <ul>
+                            <li>❤️‍🔥 Pasión intensa</li>
+                            <li>🌶️ Atracción sexual</li>
+                            <li>💋 Seducción poderosa</li>
+                            <li>🔥 Despertar del deseo</li>
+                            <li>💑 Intimidad de pareja</li>
+                            <li>⚡ Energía sexual</li>
+                        </ul>
+                        <button class="magic-btn" onclick="contactWhatsApp('magia-roja')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="magic-card black-magic">
+                    <div class="magic-header">
+                        <h3>🌑 Magia Negra 🌑</h3>
+                        <p>Rituales de poder y dominio</p>
+                    </div>
+                    <div class="magic-content">
+                        <ul>
+                            <li>⚔️ Justicia espiritual</li>
+                            <li>🛡️ Defensa psíquica</li>
+                            <li>👁️ Dominio de voluntades</li>
+                            <li>🌪️ Separación de parejas</li>
+                            <li>⚖️ Equilibrio kármico</li>
+                            <li>🔒 Casos extremos</li>
+                        </ul>
+                        <button class="magic-btn" onclick="contactWhatsApp('magia-negra')">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Suerte y Dinero -->
+    <section id="suerte" class="content-section prosperity-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💰 Prosperidad y Abundancia 💰</h2>
+                <p class="section-subtitle">Atrae la riqueza y el éxito a tu vida</p>
+            </div>
+            
+            <div class="prosperity-grid">
+                <div class="prosperity-card">
+                    <div class="card-icon">🍀</div>
+                    <h3>Rituales de Suerte</h3>
+                    <p>Cambia tu destino y atrae la fortuna con rituales ancestrales de buena suerte.</p>
+                    <div class="benefits">
+                        <span class="benefit">🎯 Oportunidades laborales</span>
+                        <span class="benefit">🎰 Suerte en juegos</span>
+                        <span class="benefit">🌈 Cambio de ciclos</span>
+                        <span class="benefit">✨ Sincronicidades positivas</span>
+                    </div>
+                    <button class="prosperity-btn" onclick="contactWhatsApp('rituales-suerte')">
+                        Atraer Suerte
+                    </button>
+                </div>
+
+                <div class="prosperity-card">
+                    <div class="card-icon">💎</div>
+                    <h3>Abundancia Material</h3>
+                    <p>Rituales específicos para atraer dinero, incrementar ingresos y prosperidad económica.</p>
+                    <div class="benefits">
+                        <span class="benefit">💼 Éxito en negocios</span>
+                        <span class="benefit">📈 Aumento de ingresos</span>
+                        <span class="benefit">🏦 Estabilidad financiera</span>
+                        <span class="benefit">💰 Cobros pendientes</span>
+                    </div>
+                    <button class="prosperity-btn" onclick="contactWhatsApp('abundancia-material')">
+                        Atraer Dinero
+                    </button>
+                </div>
+
+                <div class="prosperity-card">
+                    <div class="card-icon">🎖️</div>
+                    <h3>Éxito Profesional</h3>
+                    <p>Rituales para abrir caminos laborales, conseguir ascensos y reconocimiento profesional.</p>
+                    <div class="benefits">
+                        <span class="benefit">🎯 Nuevas oportunidades</span>
+                        <span class="benefit">📊 Ascensos laborales</span>
+                        <span class="benefit">🤝 Buenas relaciones</span>
+                        <span class="benefit">🏆 Reconocimiento</span>
+                    </div>
+                    <button class="prosperity-btn" onclick="contactWhatsApp('exito-profesional')">
+                        Impulsar Carrera
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Amarres -->
+    <section id="amarres" class="content-section bindings-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💝 Amarres Especializados 💝</h2>
+                <p class="section-subtitle">Rituales de unión y atracción amorosa</p>
+            </div>
+            
+            <div class="bindings-container">
+                <div class="binding-type">
+                    <div class="binding-header">
+                        <h3>🌹 Amarres Dulces</h3>
+                        <span class="binding-tag">Más Popular</span>
+                    </div>
+                    <p class="binding-description">
+                        Rituales suaves que atraen el amor de forma natural, sin forzar la voluntad. 
+                        Ideales para primeros acercamientos y despertar el interés genuino.
+                    </p>
+                    <div class="binding-features">
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Respeta el libre albedrío</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-leaf"></i>
+                            <span>Solo energías positivas</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>Resultados graduales</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Sin efectos negativos</span>
+                        </div>
+                    </div>
+                    <button class="binding-btn sweet" onclick="contactWhatsApp('amarre-dulce')">
+                        <i class="fab fa-whatsapp"></i> Consultar Amarre Dulce
+                    </button>
+                </div>
+
+                <div class="binding-type">
+                    <div class="binding-header">
+                        <h3>⚡ Amarres de Dominio</h3>
+                        <span class="binding-tag intense">Intenso</span>
+                    </div>
+                    <p class="binding-description">
+                        Rituales poderosos para casos difíciles donde se requiere una intervención más directa. 
+                        Para cuando la persona está muy distante o hay terceras personas involucradas.
+                    </p>
+                    <div class="binding-features">
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Rituales intensos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-target"></i>
+                            <span>Casos complejos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-stopwatch"></i>
+                            <span>Resultados rápidos</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i>
+                            <span>Unión permanente</span>
+                        </div>
+                    </div>
+                    <button class="binding-btn intense" onclick="contactWhatsApp('amarre-dominio')">
+                        <i class="fab fa-whatsapp"></i> Consultar Amarre de Dominio
+                    </button>
+                </div>
+
+                <div class="binding-type">
+                    <div class="binding-header">
+                        <h3>🔥 Amarres Sexuales</h3>
+                        <span class="binding-tag passion">Pasión</span>
+                    </div>
+                    <p class="binding-description">
+                        Rituales especializados en despertar la pasión y el deseo sexual. 
+                        Perfectos para avivar la llama en relaciones existentes o atraer con magnetismo sexual.
+                    </p>
+                    <div class="binding-features">
+                        <div class="feature">
+                            <i class="fas fa-fire"></i>
+                            <span>Atracción sexual intensa</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-magnet"></i>
+                            <span>Magnetismo personal</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-thermometer-full"></i>
+                            <span>Pasión ardiente</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-infinity"></i>
+                            <span>Deseo constante</span>
+                        </div>
+                    </div>
+                    <button class="binding-btn passion" onclick="contactWhatsApp('amarre-sexual')">
+                        <i class="fab fa-whatsapp"></i> Consultar Amarre Sexual
+                    </button>
+                </div>
+            </div>
+
+            <div class="binding-guarantee">
+                <div class="guarantee-content">
+                    <h4>🛡️ Garantía y Compromiso</h4>
+                    <p>Todos nuestros amarres incluyen seguimiento personalizado y garantía de resultados. 
+                    Trabajamos con materiales consagrados y rituales probados por generaciones.</p>
+                    <div class="guarantee-points">
+                        <span>✅ Rituales personalizados</span>
+                        <span>✅ Materiales de calidad</span>
+                        <span>✅ Seguimiento completo</span>
+                        <span>✅ Discreción absoluta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="content-section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📞 Contacto y Consultas 📞</h2>
+                <p class="section-subtitle">Estamos aquí para ayudarte en tu camino espiritual</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>🌟 Información de Contacto</h3>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">📱</div>
+                            <div class="method-info">
+                                <h4>WhatsApp Directo</h4>
+                                <p>Respuesta inmediata para consultas urgentes</p>
+                                <button class="contact-btn whatsapp" onclick="contactWhatsApp()">
+                                    <i class="fab fa-whatsapp"></i> Chatear Ahora
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">⏰</div>
+                            <div class="method-info">
+                                <h4>Horarios de Atención</h4>
+                                <p>Lunes a Domingo: 8:00 AM - 10:00 PM</p>
+                                <p class="emergency">🚨 Emergencias: 24/7</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="method-icon">🔒</div>
+                            <div class="method-info">
+                                <h4>Confidencialidad</h4>
+                                <p>Todas las consultas son completamente privadas y confidenciales</p>
+                                <p>Tu información está protegida</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="consultation-types">
+                    <h3>💭 Tipos de Consulta</h3>
+                    <div class="consultation-grid">
+                        <div class="consultation-card">
+                            <h4>🏠 Atención Personal</h4>
+                            <p>Consulta presencial personalizada en diferentes ciudades</p>
+                            <button onclick="contactWhatsApp('consulta-presencial')">Agendar Cita</button>
+                        </div>
+                        
+                        <div class="consultation-card">
+                            <h4>📱 Virtual por WhatsApp</h4>
+                            <p>Consulta completa y orientación a través de WhatsApp</p>
+                            <button onclick="contactWhatsApp('consulta-completa')">Contactar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h3>❓ Preguntas Frecuentes</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>¿Cuánto tiempo tardan en hacer efecto los rituales?</h4>
+                        <p>Los resultados varían según el caso, pero generalmente se ven cambios entre 7 y 21 días.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>¿Los rituales son seguros?</h4>
+                        <p>Sí, trabajamos únicamente con energías positivas y métodos tradicionales probados.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>¿Necesito estar presente para el ritual?</h4>
+                        <p>No es necesario, podemos realizar el trabajo a distancia con tu autorización.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>¿Qué información necesitas para el ritual?</h4>
+                        <p>Nombre completo, fecha de nacimiento y una foto reciente de la persona objetivo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🔮 Manantial de los Secretos</h3>
+                    <p>Tu portal hacia el mundo esotérico y la magia ancestral. Conectamos el plano físico con el espiritual para brindarte las soluciones que necesitas.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" onclick="contactWhatsApp()"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>🌟 Servicios</h4>
+                    <ul>
+                        <li><a href="#amor">Magia del Amor</a></li>
+                        <li><a href="#amarres">Amarres Especializados</a></li>
+                        <li><a href="#magia">Magia Blanca/Roja/Negra</a></li>
+                        <li><a href="#suerte">Suerte y Prosperidad</a></li>
+                        <li><a href="#contacto">Atención Presencial</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>📞 Contacto Rápido</h4>
+                    <button class="footer-whatsapp" onclick="contactWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                        Consulta por WhatsApp
+                    </button>
+                    <p class="footer-schedule">
+                        🕐 Disponible 24/7<br>
+                        🔒 Consultas confidenciales
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Manantial de los Secretos. Todos los derechos reservados.</p>
+                <p class="disclaimer">Los servicios esotéricos son para entretenimiento y orientación espiritual.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float" onclick="contactWhatsApp()">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="whatsapp-tooltip">
+            ¡Consulta ahora!<br>
+            <small>Respuesta inmediata</small>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -14,10 +14,10 @@ echo "📅 $(date)"
 echo ""
 
 # Configuración
-PROJECT_NAME="manantial-de-los-secretos"
+PROJECT_NAME="Manantial"
 PROJECT_DIR="/home/$USER/$PROJECT_NAME"
 SERVICE_NAME="manantial-server"
-GITHUB_REPO="https://github.com/[TU-USUARIO]/manantial-de-los-secretos.git"
+GITHUB_REPO="https://github.com/RicardoAM94/Manantial.git"
 
 # Colores para output
 RED='\033[0;31m'
@@ -161,8 +161,23 @@ configure_project() {
     
     cd "$PROJECT_DIR"
     
-    # Crear directorios necesarios
+    # Crear directorios necesarios si no existen
     mkdir -p data
+    
+    # Verificar que existan los archivos esenciales
+    if [ ! -f "data/announcements.json" ]; then
+        log_error "Archivo data/announcements.json no encontrado en el repositorio"
+        log_info "Por favor, asegúrate de que el repositorio tenga la estructura completa"
+        exit 1
+    fi
+    
+    if [ ! -f "public/index.html" ]; then
+        log_error "Archivo public/index.html no encontrado en el repositorio"
+        log_info "Por favor, asegúrate de que el repositorio tenga la estructura completa"
+        exit 1
+    fi
+    
+    log_success "Archivos esenciales del proyecto verificados"
     
     # Copiar archivo de configuración de entorno
     if [ ! -f ".env" ]; then
@@ -206,10 +221,37 @@ EOF
     log_success "Configuración del proyecto completada"
 }
 
+# Función para limpiar servicios systemd anteriores
+cleanup_old_services() {
+    log_info "Limpiando servicios systemd anteriores..."
+    
+    # Detener y deshabilitar servicio si existe
+    if sudo systemctl list-units --full -all | grep -Fq "$SERVICE_NAME.service"; then
+        log_info "Deteniendo servicio existente..."
+        sudo systemctl stop $SERVICE_NAME 2>/dev/null || true
+        sudo systemctl disable $SERVICE_NAME 2>/dev/null || true
+    fi
+    
+    # Eliminar archivo de servicio si existe
+    if [ -f "/etc/systemd/system/$SERVICE_NAME.service" ]; then
+        log_info "Eliminando archivo de servicio anterior..."
+        sudo rm -f "/etc/systemd/system/$SERVICE_NAME.service"
+    fi
+    
+    # Recargar daemon
+    sudo systemctl daemon-reload
+    
+    log_success "Servicios anteriores limpiados"
+}
+
 # Función para crear servicio systemd
 create_systemd_service() {
     log_info "Creando servicio systemd..."
-    
+
+    # Detectar la ubicación de Node.js
+    NODE_PATH=$(which node)
+    log_info "Node.js encontrado en: $NODE_PATH"
+
     # Crear archivo de servicio
     sudo tee /etc/systemd/system/$SERVICE_NAME.service > /dev/null << EOF
 [Unit]
@@ -221,7 +263,7 @@ Type=simple
 User=$USER
 WorkingDirectory=$PROJECT_DIR
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/node server.js
+ExecStart=$NODE_PATH server.js
 Restart=on-failure
 RestartSec=10
 
@@ -243,7 +285,7 @@ EOF
     # Recargar systemd y habilitar servicio
     sudo systemctl daemon-reload
     sudo systemctl enable $SERVICE_NAME
-    
+
     log_success "Servicio systemd creado y habilitado"
 }
 
@@ -342,6 +384,7 @@ main() {
     clone_repository
     install_dependencies
     configure_project
+    cleanup_old_services
     create_systemd_service
     configure_firewall
     

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Manantial de los Secretos</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/whatsapp-simple.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🔮</span>
+                    <span class="logo-text">Panel de Administración</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-preview" onclick="previewSite()">
+                        <i class="fas fa-eye"></i> Ver Sitio
+                    </button>
+                    <button class="btn-warning" onclick="clearAllData()" title="Limpiar todos los datos">
+                        <i class="fas fa-trash-alt"></i> Limpiar Datos
+                    </button>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <ul class="nav-tabs">
+                <li class="nav-item active" onclick="showTab('announcements')">
+                    <i class="fas fa-bullhorn"></i> Anuncios de Atención
+                </li>
+                <li class="nav-item" onclick="showTab('messages')">
+                    <i class="fas fa-comments"></i> Mensajes WhatsApp
+                </li>
+                <li class="nav-item" onclick="showTab('analytics')">
+                    <i class="fas fa-chart-bar"></i> Estadísticas
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Bienvenida -->
+            <div class="welcome-section" id="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-icon">🔮</div>
+                    <h3>Bienvenido al Panel de Administración</h3>
+                    <p>Sistema de gestión para <strong>Manantial de los Secretos</strong></p>
+                    <div class="security-status">
+                        <span class="status-indicator"></span>
+                        <span>Sesión segura activa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anuncios Tab -->
+            <div id="announcements-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h2><i class="fas fa-bullhorn"></i> Gestión de Anuncios de Atención</h2>
+                    <button class="btn-primary" onclick="showAddAnnouncementModal()">
+                        <i class="fas fa-plus"></i> Nuevo Anuncio
+                    </button>
+                </div>
+
+                <!-- Lista de Anuncios Activos -->
+                <div class="announcements-grid" id="announcements-list">
+                    <!-- Los anuncios se cargarán dinámicamente aquí -->
+                </div>
+
+                <!-- Anuncios Programados -->
+                <div class="scheduled-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Anuncios Programados</h3>
+                    <div class="scheduled-grid" id="scheduled-list">
+                        <!-- Anuncios programados aparecerán aquí -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensajes Tab -->
+            <div id="messages-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-comments"></i> Configuración de Mensajes WhatsApp</h2>
+                </div>
+
+                <div class="messages-config">
+                    <div class="config-card">
+                        <h3>📱 Número de WhatsApp</h3>
+                        <div class="whatsapp-config">
+                            <div class="phone-input-simple">
+                                <label for="whatsapp-number">Número completo (con código de país):</label>
+                                <div class="input-with-validation">
+                                    <input type="text" 
+                                           id="whatsapp-number" 
+                                           placeholder="Ej: +573148014430" 
+                                           oninput="validateWhatsAppInput(this)"
+                                           maxlength="20">
+                                    <div class="validation-indicator" id="validation-indicator">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="input-help">
+                                    � <strong>Formato:</strong> +[código país][número]<br>
+                                    📍 <strong>Ejemplos:</strong> +573148014430 (Colombia), +5491234567890 (Argentina), +34612345678 (España)
+                                </div>
+                                <div class="validation-message" id="validation-message"></div>
+                            </div>
+                            
+                            <div class="whatsapp-actions">
+                                <button class="btn-test" onclick="testWhatsAppNumber()" title="Abrir WhatsApp para probar">
+                                    <i class="fab fa-whatsapp"></i> Probar Número
+                                </button>
+                                <button class="btn-save" onclick="saveWhatsAppConfig()">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h3>💬 Mensajes Personalizados</h3>
+                        <div class="message-templates">
+                            <div class="template-item">
+                                <label>Consulta Presencial:</label>
+                                <textarea id="msg-presencial" placeholder="Mensaje para consulta presencial..."></textarea>
+                            </div>
+                            <div class="template-item">
+                                <label>Viajes/Atención en Ciudades:</label>
+                                <textarea id="msg-viajes" placeholder="Mensaje para viajes a otras ciudades..."></textarea>
+                            </div>
+                        </div>
+                        <button class="btn-save" onclick="saveMessageTemplates()">
+                            <i class="fas fa-save"></i> Guardar Mensajes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-chart-bar"></i> Estadísticas del Sitio</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-content">
+                            <h3 id="page-views">0</h3>
+                            <p>Visitas Totales</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="stat-content">
+                            <h3 id="whatsapp-clicks">0</h3>
+                            <p>Clicks a WhatsApp</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bullhorn"></i></div>
+                        <div class="stat-content">
+                            <h3 id="active-announcements">0</h3>
+                            <p>Anuncios Activos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Agregar/Editar Anuncio -->
+    <div id="announcement-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title"><i class="fas fa-plus"></i> Nuevo Anuncio</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="announcement-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="ann-title">📍 Título del Anuncio</label>
+                        <input type="text" id="ann-title" placeholder="Ej: Atención en Medellín - 25 de Octubre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-city">🏙️ Ciudad</label>
+                        <input type="text" id="ann-city" placeholder="Ej: Medellín, Bogotá, Cali..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-date">📅 Fecha de Atención</label>
+                        <input type="date" id="ann-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-time">⏰ Horario</label>
+                        <input type="text" id="ann-time" placeholder="Ej: 9:00 AM - 6:00 PM" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="ann-location">📍 Ubicación/Dirección</label>
+                        <input type="text" id="ann-location" placeholder="Ej: Centro Comercial Santafé, Local 205">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="ann-description">📝 Descripción</label>
+                        <textarea id="ann-description" placeholder="Información adicional sobre la atención en esta ciudad..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-priority">⭐ Prioridad</label>
+                        <select id="ann-priority">
+                            <option value="high">🔴 Alta (Aparece primero)</option>
+                            <option value="normal" selected>🟡 Normal</option>
+                            <option value="low">🟢 Baja</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-status">📊 Estado</label>
+                        <select id="ann-status">
+                            <option value="active" selected>✅ Activo</option>
+                            <option value="scheduled">⏳ Programado</option>
+                            <option value="inactive">❌ Inactivo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-expires">⏰ Vence el</label>
+                        <input type="date" id="ann-expires" title="El anuncio se ocultará automáticamente en esta fecha">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ann-whatsapp-msg">💬 Mensaje WhatsApp Personalizado</label>
+                        <select id="ann-whatsapp-msg">
+                            <option value="consulta-presencial">Consulta Presencial (Default)</option>
+                            <option value="viaje-ciudad">Viaje a Ciudad</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width" id="custom-msg-group" style="display: none;">
+                        <label for="ann-custom-msg">✏️ Mensaje Personalizado</label>
+                        <textarea id="ann-custom-msg" placeholder="Escribe tu mensaje personalizado para WhatsApp..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Guardar Anuncio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-body">
+                <div class="confirm-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3 id="confirm-title">¿Confirmar acción?</h3>
+                <p id="confirm-message">Esta acción no se puede deshacer.</p>
+                <div class="confirm-actions">
+                    <button class="btn-secondary" onclick="closeConfirmModal()">Cancelar</button>
+                    <button class="btn-danger" id="confirm-action">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/admin.js"></script>
+    
+    <!-- Eventos adicionales -->
+    <script>
+        // Cerrar modal al hacer click fuera
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+        
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                }
+            }
+        });
+        
+        // Auto-guardar configuración
+        const whatsappInput = document.getElementById('whatsapp-number');
+        const msgPresencialInput = document.getElementById('msg-presencial');
+        const msgViajesInput = document.getElementById('msg-viajes');
+        
+        if (whatsappInput) whatsappInput.addEventListener('blur', saveWhatsAppConfig);
+        if (msgPresencialInput) msgPresencialInput.addEventListener('blur', saveMessageTemplates);
+        if (msgViajesInput) msgViajesInput.addEventListener('blur', saveMessageTemplates);
+    </script>
+</body>
+</html>

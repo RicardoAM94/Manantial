@@ -1,0 +1,83 @@
+{
+  "announcements": [
+    {
+      "id": "amor_permanente_default",
+      "title": "💖 AMARRES DE AMOR - RESULTADOS GARANTIZADOS",
+      "city": "Servicios de Amor",
+      "date": "2030-12-31",
+      "time": "Atención 24/7",
+      "location": "Consulta vía WhatsApp",
+      "description": "💝 RECUPERA A TU AMOR PERDIDO\n🌹 Amarres dulces y de regreso efectivos\n💑 Unión de parejas en crisis\n⚡ Endulzamientos para despertar pasión\n🔮 Magia roja ancestral - Resultados comprobados\n💔 ¿Te dejó por otra persona? ¡Lo/la recupero!\n🎁 CONSULTA INICIAL GRATUITA\n✨ + de 15 años de experiencia exitosa",
+      "priority": "normal",
+      "status": "active",
+      "expires": "2030-12-31",
+      "whatsappMsg": "custom",
+      "customMsg": "💖 Hola! Necesito ayuda con un problema de amor. Mi pareja me dejó y quiero recuperar nuestro amor. ¿Puedes ayudarme con un amarre efectivo? Necesito consulta gratuita.",
+      "created": "2025-10-16T20:00:00.000Z",
+      "isDefault": true
+    },
+    {
+      "id": "danos_proteccion_default",
+      "title": "🛡️ PROTECCIÓN TOTAL - CORTA DAÑOS Y BRUJERÍAS",
+      "city": "Limpieza Espiritual",
+      "date": "2030-12-31",
+      "time": "Urgencias 24h",
+      "location": "Trabajo a distancia",
+      "description": "⚡ ¿SIENTES QUE TE HACEN DAÑO?\n🔥 Detectamos y cortamos trabajos negativos\n🧿 Protección contra mal de ojo y envidias\n💀 Reversión de brujerías enviadas\n🛡️ Escudo espiritual permanente\n👁️ Neutralizamos a tus enemigos\n🌟 Limpieza total de energías negativas\n🆓 DIAGNÓSTICO GRATUITO - Detectamos el daño",
+      "priority": "normal",
+      "status": "active",
+      "expires": "2030-12-31",
+      "whatsappMsg": "custom",
+      "customMsg": "🛡️ ¡NECESITO PROTECCIÓN URGENTE! Siento que me están haciendo daño/brujería. Todo me sale mal y creo que tengo enemigos. Quiero diagnóstico GRATUITO para detectar qué me están haciendo.",
+      "created": "2025-10-16T20:05:00.000Z",
+      "isDefault": true
+    },
+    {
+      "id": "suerte_prosperidad_default",
+      "title": "🍀 SUERTE Y PROSPERIDAD - ABRE TUS CAMINOS",
+      "city": "Rituales de Abundancia",
+      "date": "2030-12-31",
+      "time": "Resultados inmediatos",
+      "location": "Magia de prosperidad",
+      "description": "💰 ATRAE DINERO Y OPORTUNIDADES\n🎯 Rituales de suerte para trabajo y negocios\n🍀 Abre caminos económicos bloqueados\n🎲 Suerte en juegos y apuestas\n💎 Amuletos de prosperidad personalizados\n⚡ Destraba situaciones estancadas\n🌟 Atrae clientes y oportunidades de oro\n🎁 PRIMERA CONSULTA SIN COSTO",
+      "priority": "normal",
+      "status": "active",
+      "expires": "2030-12-31",
+      "whatsappMsg": "custom",
+      "customMsg": "🍀 ¡Necesito SUERTE Y PROSPERIDAD! Estoy sin trabajo/con problemas económicos y necesito que se abran mis caminos. Quiero rituales para atraer dinero y oportunidades. Consulta gratuita por favor.",
+      "created": "2025-10-16T20:10:00.000Z",
+      "isDefault": true
+    },
+    {
+      "id": "rituales_personalizados_default",
+      "title": "🔮 RITUALES PERSONALIZADOS - PARA TU CASO ESPECÍFICO",
+      "city": "Magia Especializada",
+      "date": "2030-12-31",
+      "time": "Trabajo individualizado",
+      "location": "Ritual único para ti",
+      "description": "✨ MAGIA HECHA ESPECIALMENTE PARA TI\n🎯 Analizamos tu caso particular\n🔥 Ritual único según tu necesidad específica\n🌙 Magia Blanca, Roja o Negra según corresponda\n💫 Trabajos que otros no pueden resolver\n⚡ Combinamos diferentes tipos de magia\n🎁 ESTUDIO PERSONALIZADO GRATUITO\n🌟 Casos imposibles son nuestra especialidad",
+      "priority": "normal",
+      "status": "active",
+      "expires": "2030-12-31",
+      "whatsappMsg": "custom",
+      "customMsg": "🔮 Hola! Tengo un caso muy específico y particular que necesita un ritual personalizado. Otros no han podido ayudarme. ¿Puedes hacer un ESTUDIO GRATUITO de mi situación para crear un ritual único?",
+      "created": "2025-10-16T20:15:00.000Z",
+      "isDefault": true
+    }
+  ],
+  "config": {
+    "whatsapp": {
+      "number": "+573148014430"
+    },
+    "messages": {
+      "presencial": "¡Hola! Me interesa agendar una cita para atención presencial. ¿Cuál es la disponibilidad?",
+      "viajes": "¡Hola! Me interesa agendar una cita en {ciudad} para el {fecha}. ¿Hay disponibilidad?"
+    },
+    "updated": "2025-10-15T22:39:15.610Z"
+  },
+  "stats": {
+    "pageViews": 34,
+    "whatsappClicks": 1,
+    "totalAnnouncements": 4
+  }
+}

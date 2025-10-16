@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Panel - Manantial de los Secretos</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-gold: #ffd700;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .login-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .login-subtitle {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #ffed4e 100%);
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            text-align: center;
+        }
+
+        .security-info {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .login-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">🔮</div>
+        <h1 class="login-title">Panel de Administración</h1>
+        <p class="login-subtitle">Manantial de los Secretos</p>
+
+        <div id="error-message" class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="error-text">Credenciales incorrectas</span>
+        </div>
+
+        <div id="success-message" class="success-message">
+            <i class="fas fa-check-circle"></i>
+            Acceso autorizado, redirigiendo...
+        </div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> Usuario
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Ingresa tu usuario"
+                    required
+                    autocomplete="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Contraseña
+                </label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Ingresa tu contraseña"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <button type="submit" class="login-btn" id="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </button>
+        </form>
+
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al sitio principal
+        </a>
+
+        <div class="security-info">
+            <i class="fas fa-shield-alt"></i>
+            <strong>Área Restringida:</strong> Solo personal autorizado puede acceder a este panel de administración.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('login-btn');
+            const errorMsg = document.getElementById('error-message');
+            const successMsg = document.getElementById('success-message');
+            
+            // Deshabilitar botón durante el proceso
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+            
+            // Ocultar mensajes anteriores
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            
+            try {
+                const response = await fetch('/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Login exitoso
+                    successMsg.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = '/admin/dashboard';
+                    }, 1500);
+                } else {
+                    // Error de autenticación
+                    errorMsg.style.display = 'block';
+                    document.getElementById('error-text').textContent = result.message || 'Credenciales incorrectas';
+                    
+                    // Limpiar campos
+                    document.getElementById('password').value = '';
+                    document.getElementById('username').focus();
+                }
+            } catch (error) {
+                console.error('Error en login:', error);
+                errorMsg.style.display = 'block';
+                document.getElementById('error-text').textContent = 'Error de conexión. Intenta nuevamente.';
+            }
+            
+            // Re-habilitar botón
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Iniciar Sesión';
+        });
+
+        // Enfocar campo de usuario al cargar
+        document.getElementById('username').focus();
+
+        // Enter en el campo usuario pasa al password
+        document.getElementById('username').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
+</body>
+</html>
